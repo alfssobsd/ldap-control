@@ -28,7 +28,7 @@ set :domain, 'ldap-01.vuaro.ru'
 set :deploy_to, '/srv/app/ldap_control'
 # set :repository, '.'
 set :branch, 'master'
-set :rsync_options, %w[--recursive --delete --delete-excluded --exclude .git*]
+set :rsync_options, %w[--recursive --delete --delete-excluded --exclude .git* --exclude .rvmrc --exclude .idea]
 set :rsync_stage, '/tmp/ldap_control'
 set :shared_paths, ['config/database.yml', 'log', 'config/puma.rb', 'config/ldap-control-settings.yml']
 
