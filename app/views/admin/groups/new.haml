@@ -1,0 +1,35 @@
+- flash.each do |name, msg|
+  .row
+    .large-push-3.large-6.columns
+      %div{class: flash_class(name) }
+        = msg
+
+= form_for @group, url:admin_groups_path, method: :post do |f|
+  .large-5.columns
+    .row.collapse.prefix-radius
+      .small-3.columns
+        %span.prefix
+          DN
+      .small-9.columns
+        = f.text_field :dn, disabled:true
+    .row.collapse.prefix-radius
+      .small-3.columns
+        %span.prefix
+          CN
+      .small-9.columns
+        = f.text_field :cn
+      = field_error_message(@group, :cn)
+    .row.collapse.prefix-radius
+      .small-3.columns
+        %span.prefix
+          Gid Number
+      .small-9.columns
+        = f.text_field :gidnumber
+      = field_error_message(@group, :gidnumber)
+    .row.collapse.prefix-radius
+      %label
+        %span.prefix
+          Description
+        = f.text_area :description
+      = field_error_message(@group, :description)
+    = f.button "Create"

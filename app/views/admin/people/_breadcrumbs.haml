@@ -1,0 +1,7 @@
+%ul.breadcrumbs
+  %li
+    = link_to 'People', admin_people_path
+  %li
+    = link_to 'Edit', edit_admin_person_path(@person.uid)
+  %li.current
+    = link_to @person.uid, edit_admin_person_path(@person.uid)

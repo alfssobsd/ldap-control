@@ -1,0 +1,155 @@
+- flash.each do |name, msg|
+  .row
+    .large-12.columns
+      %div{class: flash_class(name) }
+        = msg
+
+.row{style: 'padding-bottom:40px;'}
+  .large-5.columns
+    .row
+      .small-6.columns
+        = link_to "#", class: "th" do
+          = image_tag  person_photo_path(@person.uid, size: 'medium')
+      .small-6.columns
+        = form_for @person_photo, url:admin_person_people_photo_path(@person.uid), method: :patch do |f|
+          = f.file_field :upload_image
+          = f.button "Update Photo", class:""
+
+.row
+  .large-12.columns
+    = form_for @person, url:admin_person_path(@person.uid), method: :put do |f|
+      .large-5.columns
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              DN
+          .small-9.columns
+            = f.text_field :dn, disabled:true
+          = field_error_message(@person, :dn)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              UID
+          .small-9.columns
+            = f.text_field :uid
+          = field_error_message(@person, :uid)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              First Name
+          .small-9.columns
+            = f.text_field :givenname
+          = field_error_message(@person, :givenname)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Last Name
+          .small-9.columns
+            = f.text_field :sn
+          = field_error_message(@person, :sn)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Post
+          .small-9.columns
+            = f.text_field :title
+          = field_error_message(@person, :title)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Organization
+          .small-9.columns
+            = f.text_field :o
+          = field_error_message(@person, :o)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Location
+          .small-9.columns
+            = f.text_field :l
+          = field_error_message(@person, :l)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Type
+          .small-9.columns
+            = f.select :employeetype, options_for_select(Ldap::Person::EMPLOY_TYPES, @person.employeetype)
+          = field_error_message(@person, :employeetype)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Skype
+          .small-9.columns
+            = f.text_field :skype
+          = field_error_message(@person, :skype)
+        - @person.mobile.each do |mobile|
+          .row.collapse.prefix-radius
+            .small-3.columns
+              %span.prefix
+                = fa_icon 'phone'
+            .small-9.columns
+              = f.text_field "mobile][", value: mobile, :id=>"item-#{SecureRandom.uuid}"
+            = field_error_message(@person, :mobile)
+        - @person.mail.each do |mail|
+          .row.collapse.prefix-radius
+            .small-3.columns
+              %span.prefix
+                = fa_icon 'envelope'
+            .small-9.columns
+              = f.text_field "mail][", value: mail, :id=>"item-#{SecureRandom.uuid}"
+            = field_error_message(@person, :mail)
+        = f.button "Update"
+      .large-1.columns
+      .large-5.columns
+        .row.collapse.prefix-radius
+          .small-5.columns
+            %span.prefix
+              Password
+          .small-7.columns
+            = f.password_field :password
+          = field_error_message(@person, :password)
+        .row.collapse.prefix-radius
+          .small-5.columns
+            %span.prefix
+              Password confirm
+          .small-7.columns
+            = f.password_field :password_confirmation
+          = field_error_message(@person, :password_confirmation)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Uid Number
+          .small-9.columns
+            = f.text_field :uidnumber
+          = field_error_message(@person, :uidnumber)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Gid Number
+          .small-9.columns
+            = f.text_field :gidnumber
+          = field_error_message(@person, :gidnumber)
+        .row.collapse.prefix-radius
+          .small-3.columns
+            %span.prefix
+              Home Dir
+          .small-9.columns
+            = f.text_field :homedirectory
+          = field_error_message(@person, :homedirectory)
+        .row.collpase.prefix-radius
+          .small-12.columns
+            ObjectClass
+            %ul.disc
+              - @person.objectclass.each do |objectclass|
+                %li
+                  = objectclass
+      .large-1.columns
+
+.row
+  .large-12.columns
+    %h2
+      Member of groups
+    %ul.disc
+      - @person.groups.each do |group|
+        %li
+          = link_to group.cn, edit_admin_group_path(group.cn)

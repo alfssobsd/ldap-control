@@ -1,0 +1,9 @@
+.row.sigin-block
+  .large-6.large-offset-3.columns
+    - flash.each do |name, msg|
+      %div{class: flash_class(name) }
+        = msg
+    = form_for @person, url:sessions_path, method: :post do |f|
+      = f.text_field :uid
+      = f.password_field :password
+      = f.button "Enter"

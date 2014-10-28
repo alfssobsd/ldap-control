@@ -1,0 +1,59 @@
+-# coding: UTF-8
+.row
+  .large-9.columns
+    .row.collapse
+      .small-10.columns
+        = text_field_tag "search", "search"
+      .small-2.columns
+        = link_to params.merge({:q => "search"}), class: "button postfix" do
+          = fa_icon 'search'
+    .row
+      .small-12.columns
+        %dl.sub-nav
+          %dt
+            Filter:
+          - Ldap::Person::EMPLOY_TYPES.each do |employeetype|
+            %dd
+              = link_to employeetype, params.merge({:employeetype => employeetype})
+          %dd
+            = link_to "All", params.merge({:employeetype => "all"})
+  .large-3.columns
+    = link_to new_admin_person_path, class: "button postfix" do
+      = fa_icon 'plus'
+      Create
+.row
+  .large-12.columns
+    %table.table-expand
+      %thead
+        %tr
+          %th
+            photo
+          %th
+            UID
+          %th
+            Name
+          %th
+            Type
+          %th
+            Post
+          %th
+            Organization
+          %th
+            Location
+      %tbody
+        - @peoples.each do |person|
+          %tr
+            %td
+              = image_tag person_photo_path(person.uid, size: 'small')
+            %td
+              = link_to person.uid, edit_admin_person_path(person.uid)
+            %td
+              = person.cn
+            %td
+              = person.employeetype
+            %td
+              = person.title
+            %td
+              = person.o
+            %td
+              = person.l

@@ -1,0 +1,32 @@
+.row
+  .large-push-2.large-8.columns
+    .row.collapse
+      .small-10.columns
+        = text_field_tag "search", "search"
+      .small-2.columns
+        = link_to params.merge({:q => "search"}), class: "button postfix" do
+          = fa_icon 'search'
+    .row
+      .small-12.columns
+        %dl.sub-nav
+          %dt
+            Filter:
+          %dd.active
+            = link_to "staff", params.merge({:employeetype => "all"})
+
+.row
+  .large-12.columns
+    %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
+      - @peoples.each do |person|
+        %li
+
+          .person-info
+            = link_to person_path(person.uid) do
+              .person-info__photo
+                = image_tag person_photo_path(person.uid, size: 'big')
+              .person-info__name
+                = person.cn
+              .person-info__item
+                = person.title
+              .person-info__item
+                = person.o

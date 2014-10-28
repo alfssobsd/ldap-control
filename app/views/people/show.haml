@@ -1,0 +1,44 @@
+.row
+  .large-12.columns
+    %h1
+      = "#{@person.cn} (#{@person.title})"
+
+.row
+  .large-4.columns
+    = image_tag person_photo_path(@person.uid, size: 'large')
+  .large-8.columns
+    .row
+      .large-2.columns
+        %b
+          City
+      .large-10.columns
+        = @person.l
+    .row
+      .large-2.columns
+        %b
+          Organization
+      .large-10.columns
+        = @person.o
+    .row
+      .large-2.columns
+        %b
+          Skype
+      .large-10.columns
+        = link_to @person.skype, "skype:#{@person.skype}?chat"
+    .row
+      .large-2.columns
+        %b
+          Email
+      .large-10.columns
+        - @person.mail.each do |mail|
+          = mail_to mail
+          %br
+    .row
+      .large-2.columns
+        %b
+          Phone
+      .large-10.columns
+        - @person.mobile.each do |phone|
+          = phone
+          %br
+

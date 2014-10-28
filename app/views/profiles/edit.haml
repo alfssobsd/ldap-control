@@ -1,0 +1,38 @@
+- flash.each do |name, msg|
+  .row
+    .large-12.columns
+      %div{class: flash_class(name) }
+        = msg
+
+.row
+  .large-5.columns
+    = form_for @person, url:update_passowrd_profile_path, method: :patch do |f|
+      .row.collapse.prefix-radius
+        .small-5.columns
+          %span.prefix
+            Password
+        .small-7.columns
+          = f.password_field :password
+        = field_error_message(@person, :password)
+      .row.collapse.prefix-radius
+        .small-5.columns
+          %span.prefix
+            Password confirm
+        .small-7.columns
+          = f.password_field :password_confirmation
+        = field_error_message(@person, :password_confirmation)
+
+      = f.button "Update Password"
+
+  .large-7.columns
+    .row
+      .small-4.columns
+        = link_to "#", class: "th" do
+          = image_tag  person_photo_path(@person.uid, size: 'medium')
+      .small-8.columns
+        = form_for @person_photo, url: update_photo_profile_path, method: :patch do |f|
+          = f.file_field :upload_image
+          = f.hidden_field :uid, value: @person.uid
+          = field_error_message(@person_photo, :upload_image)
+          = f.button "Update Photo", class:""
+

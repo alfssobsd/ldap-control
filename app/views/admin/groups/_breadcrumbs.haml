@@ -1,0 +1,7 @@
+%ul.breadcrumbs
+  %li
+    = link_to 'Groups', admin_groups_path
+  %li
+    = link_to 'Edit', edit_admin_group_path(@group.cn)
+  %li.current
+    = link_to @group.cn, edit_admin_group_path(@group.cn)

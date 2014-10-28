@@ -1,0 +1,43 @@
+!!! 5
+%html
+  %head
+    %title
+      = yield_or_default(:title)
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body
+    .row
+      .large-12.columns
+        %nav.top-bar{"data-topbar" => ""}
+          %ul.title-area
+            %li.name
+              %h1
+                =link_to "LdapControl", root_path
+            %li.toggle-topbar.menu-icon
+              = link_to "#" do
+                %span
+                  menu
+          %section.top-bar-section
+            %ul.right
+              %li.divider
+              %li{ class: is_active?("^people")}
+                = link_to "Home", root_path
+              %li.divider
+              %li{ class: is_active?("^admin")}
+                = link_to "Admin", admin_index_path
+              %li.divider
+              %li{ class: is_active?("^settings")}
+                = link_to "Settings", admin_index_path
+              %li.divider
+              %li{ class: is_active?("^profiles")}
+                = link_to edit_profile_path do
+                  = image_tag person_photo_path(current_user.uid, size: 'small'), class: "current-user-photo"
+                  = current_user.cn
+              %li.divider
+              %li
+                = link_to sessions_path, method: :delete do
+                  Logout
+    .content-margin
+    = content_for?(:content) ? yield(:content) : yield

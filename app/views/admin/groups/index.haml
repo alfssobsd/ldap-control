@@ -1,0 +1,44 @@
+.row
+  .large-9.columns
+    .row.collapse
+      .small-10.columns
+        = text_field_tag "search", "search"
+      .small-2.columns
+        = link_to "#", class: "button postfix" do
+          = fa_icon 'search'
+    .row
+      .small-12.columns
+        %dl.sub-nav
+          %dt
+            Filter:
+          %dd.active
+            = link_to "All", "#"
+  .large-3.columns
+    = link_to new_admin_group_path, class: "button postfix" do
+      = fa_icon 'plus'
+      Create
+
+.row
+  .large-12.columns
+    %table.table-expand
+      %thead
+        %tr
+          %th
+            cn
+          %th
+            description
+          %th
+            objectclass
+          %th
+            gid
+      %tbody
+        - @groups.each do |group|
+          %tr
+            %td
+              = link_to group.cn, edit_admin_group_path(group.cn)
+            %td
+              = group.description
+            %td
+              = group.objectclass
+            %td
+              = group.gidnumber

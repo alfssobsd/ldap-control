@@ -1,0 +1,42 @@
+@import "foundation_and_overrides";
+
+.error-field {
+  background: $alert-color;
+  color: white;
+}
+
+.sigin-block {
+  padding-top: 10em;
+}
+
+.content-margin {
+  margin-top: 0.5em;
+}
+
+.table-expand {
+  width: 100%;
+}
+
+.current-user-photo {
+  width: 3em;
+}
+
+.person-info {
+  background: $oil;
+  color: $white;
+  a {
+    color: $white;
+  }
+  &__photo {
+
+  }
+
+  &__name {
+    text-align: center;
+    font-size: 1.4em;
+  };
+
+  &__item {
+    text-align: center;
+  }
+}

@@ -1,0 +1,59 @@
+production: &base
+
+  photo:
+    default: 500
+    big: 400
+    large: 300
+    medium: 200
+    small: 100
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+  ldap:
+    host: localhost
+    base: dc=domain,dc=ru
+    base_people: ou=people
+    base_group: ou=group
+    port: 1389
+    bind_dn: cn=Directory Manager
+    password: password
+
+  permission:
+    admin_group: admin-users
+
+  external_services:
+    enable:
+      - gmail_admin
+      - yandex_mail_admin
+      - redmine
+
+  google:
+    gmail_admin:
+      group: gmail-corp-accounts     #group in ldap
+      app_name: [you-app-name]       #взято из console.developers.google.com (kravchuk.sv@vuaro.ru)
+      key_path: [you-path-to-you-key]
+      service_email: [you-service-email]@developer.gserviceaccount.com
+      admin_email: [you-admin-email]
+      domains:
+        - [you-domain-1]
+        - [you-domain-2]
+
+  yandex:
+    yandex_mail_admin:
+      group: yandex-corp-accounts #group in ldap
+      token: [you-admin-token]
+      domains:
+        - [you-domain-1]
+
+
+  redmine:
+    group: redmine-corp-accounts #group in ldap
+    base_url: https://redmine.org # [you-redmine-url]
+    token: [you-admin-token]
+    auth_source_id: [you-ldap-source-id]
+
+development:
+  <<: *base

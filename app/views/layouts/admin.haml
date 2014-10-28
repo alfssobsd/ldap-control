@@ -1,0 +1,30 @@
+- content_for :content do
+  .row
+    .large-11.push-1.columns
+      = yield
+    .large-1.pull-11.columns
+      %ul.side-nav
+        %li{ class: is_active?("admin/people")}
+          = link_to admin_people_path do
+            User
+        %li{ class: is_active?("admin/group")}
+          = link_to admin_groups_path do
+            Group
+
+  %footer.row
+    .large-12.columns
+      %hr
+      .row
+        .large-6.columns
+          %p
+            LdapControl
+        .large-6.columns
+          -#%ul.inline-list.right
+          -#  %li
+          -#    = link_to "#" do
+          -#      Section 1
+          -#  %li
+          -#    = link_to "#" do
+          -#      Section 2
+
+= render :file => 'layouts/application'

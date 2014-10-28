@@ -1,0 +1,12 @@
+/.bundle
+/.rvmrc
+/.idea
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/config/ldap-control-settings.yml
+/log/*.log
+/tmp
+/bin
+/public/images/
+.DS_Store banished!
+LdapControl.iml

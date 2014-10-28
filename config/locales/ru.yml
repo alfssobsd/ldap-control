@@ -1,0 +1,85 @@
+ru:
+  hello: "Hello world"
+  activemodel:
+    errors:
+      models:
+        ldap/group:
+          attributes:
+            gidnumber:
+              not_a_number: "не число"
+              blank: "не должно быть пустым"
+              less_than: "значение должно быть  меьше чем %{count}"
+              greater_than: "значение должно быть больше чем %{count}"
+            description:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            cn:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+        ldap/person:
+          attributes:
+            uid:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+              invalid: 'не соответсвует шаблону [a-zA-Z\.\_\-]+'
+            givenname:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            sn:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            title:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            o:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            l:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            skype:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+            uidnumber:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+              not_a_number: "не число"
+              less_than: "значение должно быть  меьше чем %{count}"
+              greater_than: "значение должно быть больше чем %{count}"
+            gidnumber:
+              too_short: "значение слишком короткое"
+              blank: "не должно быть пустым"
+              not_a_number: "не число"
+              less_than: "значение должно быть  меьше чем %{count}"
+              greater_than: "значение должно быть больше чем %{count}"
+            password:
+              too_short: "пароль должен быть больше чем %{count} символов"
+            password_confirmation:
+              confirmation: "подтверждение не совпадает с введеным паролем"
+        ldap/person_photo:
+          attributes:
+            upload_image:
+              invalid_format: "изображение может быть только JPEG или PNG формата"
+              image_is_big: "изображение не должно быть больше 10 Mb"
+              empty: "выберите изображение"
+
+  ldap:
+    group:
+      flash:
+        updated: "Группа обнавлена"
+        created: "Группа создана"
+      member:
+        remove_are_you_sure: "Вы точно хотите удалить из группы пользователя "
+        flash:
+          create: "в группу добавлен "
+          destroy: "из группы удалён"
+    person:
+      flash:
+        created: "Пользователь создан"
+        updated: "Пользователь обнавлен"
+    person_password:
+      flash:
+        updated: "Парль обнавлён"
+    person_photo:
+      flash:
+        updated: "Фото обнавлено"
