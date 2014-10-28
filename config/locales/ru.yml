@@ -1,5 +1,4 @@
 ru:
-  hello: "Hello world"
   activemodel:
     errors:
       models:
@@ -44,13 +43,13 @@ ru:
               too_short: "значение слишком короткое"
               blank: "не должно быть пустым"
               not_a_number: "не число"
-              less_than: "значение должно быть  меьше чем %{count}"
+              less_than: "значение должно быть  меньше чем %{count}"
               greater_than: "значение должно быть больше чем %{count}"
             gidnumber:
               too_short: "значение слишком короткое"
               blank: "не должно быть пустым"
               not_a_number: "не число"
-              less_than: "значение должно быть  меьше чем %{count}"
+              less_than: "значение должно быть  меньше чем %{count}"
               greater_than: "значение должно быть больше чем %{count}"
             password:
               too_short: "пароль должен быть больше чем %{count} символов"
@@ -66,7 +65,7 @@ ru:
   ldap:
     group:
       flash:
-        updated: "Группа обнавлена"
+        updated: "Группа обновлена"
         created: "Группа создана"
       member:
         remove_are_you_sure: "Вы точно хотите удалить из группы пользователя "
@@ -76,10 +75,10 @@ ru:
     person:
       flash:
         created: "Пользователь создан"
-        updated: "Пользователь обнавлен"
+        updated: "Пользователь обновлен"
     person_password:
       flash:
-        updated: "Парль обнавлён"
+        updated: "Пароль обновлён"
     person_photo:
       flash:
-        updated: "Фото обнавлено"
+        updated: "Фото обновлено"
