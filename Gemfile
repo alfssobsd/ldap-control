@@ -35,8 +35,6 @@ group :development do
 end
 
 
-#db
-gem 'pg'
 #external_services
 gem 'net-ldap', '~> 0.8.0'
 #elastic

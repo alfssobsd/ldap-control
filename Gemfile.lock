@@ -126,7 +126,6 @@ GEM
     nokogumbo (1.1.12)
       nokogiri
     open4 (1.3.4)
-    pg (0.17.1)
     puma (2.9.1)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -240,7 +239,6 @@ DEPENDENCIES
   mina
   mina-rsync (~> 1.1.0)
   net-ldap (~> 0.8.0)
-  pg
   puma (~> 2.9.1)
   rails (= 4.1.6)
   redis-session-store (~> 0.8.0)
