@@ -150,8 +150,9 @@ class Ldap::Person < Ldap::Entity
       if result
         Resque.enqueue(GmailAdminApiTask, self.uid, self.password)
       end
-      result
+      return result
     end
+    true
   end
 
   #Only SSHA

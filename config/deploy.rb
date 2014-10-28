@@ -23,6 +23,7 @@ require "mina/rsync"
 #     end
 #   end
 # end
+#TODO: rsync не работает правильно, нужно написать свой алгоритм деплоя
 
 set :domain, 'ldap-01.vuaro.ru'
 set :deploy_to, '/srv/app/ldap_control'
