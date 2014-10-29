@@ -98,7 +98,7 @@ class Ldap::Person < Ldap::Entity
     ops = []
     self.cn = "#{givenname} #{sn}"
     attributes.each do |name|
-      ops << [:replace, name, send(name)] unless name == :dn or send(name).blank? or send(name).nil?
+      ops << [:replace, name, send(name)] unless name == :dn or send(name).blank?
     end
 
     #создание недостающих классов
@@ -117,7 +117,7 @@ class Ldap::Person < Ldap::Entity
       self.password = nil
       attrs = {}
       attributes.each do |name|
-        attrs[name] = send(name) unless name == :dn or send(name).blank? or send(name).nil?
+        attrs[name] = send(name) unless name == :dn or send(name).blank?
       end
 
       result = @@ldap.add(dn: self.dn, attributes: attrs)

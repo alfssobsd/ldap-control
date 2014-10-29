@@ -64,10 +64,9 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def save_and_resize(result)
-    if result.empty? or result.first['jpegPhoto'].empty?
+    if result.blank? or result.first['jpegPhoto'].blank?
       FileUtils.copy(dummy_file, default)
     else
-      # p result.first['jpegPhoto'].first
       f = File.open(default, 'wb')
       f.write(result.first['jpegPhoto'].first)
       f.close

@@ -78,7 +78,7 @@ class Ldap::Group < Ldap::Entity
     if self.valid?
       attrs = {}
       attributes.each do |name|
-        attrs[name] = send(name) unless name == :dn or send(name).blank? or send(name).nil?
+        attrs[name] = send(name) unless name == :dn or send(name).blank?
       end
 
       @@ldap.add(dn: self.dn, attributes: attrs)
@@ -88,7 +88,7 @@ class Ldap::Group < Ldap::Entity
   def save
     ops = []
     attributes.each do |name|
-      ops << [:replace, name, send(name)] unless [:dn, :uniquemember].include?(name) or send(name).blank? or send(name).nil?
+      ops << [:replace, name, send(name)] unless [:dn, :uniquemember].include?(name) or send(name).blank?
     end
     #создание недостающих классов
     need_add_classes = CLASSES - self.objectclass

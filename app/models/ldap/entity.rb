@@ -32,12 +32,12 @@ class Ldap::Entity < Ldap::Base
   def mapping(result)
     attributes.each do |name|
       if self.class::ARRAY_ATTR.include?(name)
-        if result[name].empty?
+        if result[name].blank?
           send("#{name}=", [""])
         else
           send("#{name}=", result[name])
         end
-      elsif not result[name].first.nil?
+      elsif not result[name].first.blank?
         send("#{name}=", result[name].first.force_encoding("UTF-8"))
       else
         send("#{name}=", "")

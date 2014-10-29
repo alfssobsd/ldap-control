@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def field_error_message(resource, field_name)
-    if resource.errors[field_name] and !resource.errors[field_name].empty?
+    if resource.errors[field_name] and !resource.errors[field_name].blank?
       error_message = '<small class="error">'
       resource.errors[field_name].each do |error|
         error_message += "#{error}, "
