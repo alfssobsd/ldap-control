@@ -7,15 +7,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    person = warden.authenticate!
-    if person
-      if session[:previous_url]
-        previous_url = session[:previous_url]
-        session[:previous_url] = nil
-        redirect_to previous_url
-      else
-        redirect_to root_path
-      end
+    warden.authenticate!
+    if session[:previous_url]
+      previous_url = session[:previous_url]
+      session[:previous_url] = nil
+      redirect_to previous_url
+    else
+      redirect_to root_path
     end
   end
 
@@ -27,15 +25,7 @@ class SessionsController < ApplicationController
 
 
   protected
-  def auth_params
-    params.require(:ldap_person).permit(:uid, :password)
-  end
-
   def person_object
     @person = Ldap::Person.new
-  end
-
-  def valid_auth_params?
-    auth_params[:uid] || auth_params[:password]
   end
 end
