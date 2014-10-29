@@ -3,12 +3,12 @@ class SessionsController < ApplicationController
   before_filter :person_object
 
   def new
+    flash.now.alert = warden.message if warden.message.present?
   end
 
   def create
-    person = Ldap::Person.authenticate(auth_params[:uid], auth_params[:password])
+    person = warden.authenticate!
     if person
-      session[:person] = person.uid
       if session[:previous_url]
         previous_url = session[:previous_url]
         session[:previous_url] = nil
@@ -16,16 +16,12 @@ class SessionsController < ApplicationController
       else
         redirect_to root_path
       end
-    else
-      flash.now[:alert] = "Incorrect Login or Password"
-      session[:person] = nil
-      render :new
     end
   end
 
 
   def destroy
-    session[:person] = nil
+    warden.logout
     redirect_to new_sessions_path
   end
 

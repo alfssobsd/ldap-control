@@ -11,9 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    return true if session[:person] and Ldap::Person.find(session[:person])
-    session[:person] = nil if session[:person]
-    false
+    warden.authenticated?
   end
 
   def store_location
@@ -25,8 +23,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def warden
+    env['warden']
+  end
+
   def current_user
-    @current_user ||= Ldap::Person.find(session[:person]) if session[:person]
+    warden.user
   end
 
   helper_method :current_user

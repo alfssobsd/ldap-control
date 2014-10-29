@@ -3,11 +3,8 @@ Resque.redis.namespace = "ldapcontrol:resque"
 
 class CanAccessResque
   def self.matches?(request)
-    if request.session[:person] and Ldap::Person.find(request.session[:person])
-      current_user = Ldap::Person.find(request.session[:person])
-      Ability.new(current_user).can? :manage, Ldap::Person.new
-    else
-      false
-    end
+    current_user = request.env['warden'].user
+    return false if current_user.blank?
+    Ability.new(current_user).can? :manage, Ldap::Person.new
   end
 end

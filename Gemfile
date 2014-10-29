@@ -64,7 +64,7 @@ gem 'resque-scheduler', '~> 3.0.0'
 gem 'google-api-client', '~> 0.7.1'
 gem 'redis-session-store', '~> 0.8.0'
 gem 'rest-client', '~> 1.7.2'
-# gem 'warden', '~> 1.2.3'
+gem 'warden', '~> 1.2.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
