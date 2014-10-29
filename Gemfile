@@ -26,7 +26,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :development do
   gem 'spring'
   gem 'mina'
-  gem 'mina-rsync', '~> 1.1.0', :require => false
   # gem 'capistrano'
   # gem 'capistrano-rvm'
   # gem 'capistrano-rails', '~> 1.1'
