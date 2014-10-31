@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     patch :update_photo
   end
 
+  namespace :api do
+    namespace :external do
+      resources :people_photo, only: [:show], constraints: {id: /[A-Za-z0-9\._-]+/}
+    end
+  end
+
   namespace :admin do
     constraints CanAccessResque do
       mount Resque::Server, at: 'resque'

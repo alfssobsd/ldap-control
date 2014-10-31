@@ -1,4 +1,5 @@
 class PeopleController < BaseController
+
   def index
     employeetype_list = %w(external staff partner)
     filters = employeetype_list.map { |name| Net::LDAP::Filter.eq(:employeetype, name) }
@@ -12,8 +13,13 @@ class PeopleController < BaseController
 
   def photo
     person = Ldap::Person.find(params[:person_id])
-    photo = Ldap::PersonPhoto.new({dn: person.dn, uid: person.uid})
-    redirect_to photo.get_url(params[:size])
+    if person
+      photo = Ldap::PersonPhoto.new({dn: person.dn, uid: person.uid})
+      redirect_to photo.get_url(params[:size])
+    else
+      photo = Ldap::PersonPhoto.new
+      redirect_to photo.get_dummy_url
+    end
   end
 
 end

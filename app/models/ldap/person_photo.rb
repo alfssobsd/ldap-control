@@ -25,6 +25,10 @@ class Ldap::PersonPhoto < Ldap::Entity
     url(Settings.photo[name_size])
   end
 
+  def get_dummy_url
+    dummy
+  end
+
   def update(params)
     self.upload_image = params['upload_image']
     if self.valid?

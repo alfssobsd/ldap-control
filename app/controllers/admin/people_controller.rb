@@ -33,6 +33,8 @@ class Admin::PeopleController < Admin::BaseController
     @person = Ldap::Person.find(params[:id])
   end
 
+
+  #TODO: нужно доделать редактирование мульти записей (mail, phone)
   def update
     @person_photo = Ldap::PersonPhoto.new
     @person = Ldap::Person.find(params[:id])
