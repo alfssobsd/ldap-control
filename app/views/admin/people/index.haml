@@ -12,11 +12,9 @@
         %dl.sub-nav
           %dt
             Filter:
-          - Ldap::Person::EMPLOY_TYPES.each do |employeetype|
-            %dd
+          - Ldap::Person.employeetype_keywords.each do |employeetype|
+            %dd{class: "#{is_active_employeetype(params, employeetype)}"}
               = link_to employeetype, params.merge({:employeetype => employeetype})
-          %dd
-            = link_to "All", params.merge({:employeetype => "all"})
   .large-3.columns
     = link_to new_admin_person_path, class: "button postfix" do
       = fa_icon 'plus'

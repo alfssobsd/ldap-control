@@ -31,9 +31,9 @@
               %li{ class: is_active?("^settings")}
                 = link_to "Settings", admin_index_path
               %li.divider
-              %li{ class: is_active?("^profiles")}
+              %li.avatar{ class: is_active?("^profiles")}
                 = link_to edit_profile_path do
-                  = image_tag person_photo_path(current_user.uid, size: 'small'), class: "current-user-photo"
+                  = image_tag person_photo_path(current_user.uid, size: 'small'), class: "current-user_plugin-photo"
                   = current_user.cn
               %li.divider
               %li

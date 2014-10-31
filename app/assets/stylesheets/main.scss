@@ -28,7 +28,6 @@
     color: $white;
   }
   &__photo {
-
   }
 
   &__name {
@@ -38,5 +37,11 @@
 
   &__item {
     text-align: center;
+  }
+}
+
+.avatar {
+  img {
+    height: 3em;
   }
 }
