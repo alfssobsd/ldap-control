@@ -91,6 +91,10 @@ class Ldap::Person < Ldap::Entity
     Ldap::Group.get_person_groups(self.dn)
   end
 
+  def self.employeetype_keywords
+    EMPLOY_TYPES + ['all']
+  end
+
 
   #methods ldap
   def save
@@ -123,8 +127,7 @@ class Ldap::Person < Ldap::Entity
       result = @@ldap.add(dn: self.dn, attributes: attrs)
     end
 
-    self.password = clear_password
-    result and update_password
+    result and update_password(clear_password)
   end
 
   def update(params)
@@ -138,21 +141,31 @@ class Ldap::Person < Ldap::Entity
     end
 
     if self.valid?
-      update_password and save
+      clear_password = self.password
+      result_save = save
+      result_update_password = update_password(clear_password)
+
+      if result_save and result_update_password
+        external_services(clear_password)
+      end
+      result_save and result_update_password
     end
   end
 
   protected
 
-  def update_password
-    if self.password and !self.password.empty?
-      result =  @@ldap.replace_attribute self.dn, :userPassword, generate_hash_password(self.password)
-      if result
-        Resque.enqueue(GmailAdminApiTask, self.uid, self.password)
-      end
+  def update_password(clear_password)
+    if clear_password and !clear_password.blank?
+      result =  @@ldap.replace_attribute self.dn, :userPassword, generate_hash_password(clear_password)
       return result
     end
     true
+  end
+
+  def external_services(clear_password)
+    Resque.enqueue(GmailExternalServiceJob, self.uid, clear_password) if Settings.external_services.enable.include?('gmail_admin')
+    Resque.enqueue(YandexExternalServiceJob, self.uid, clear_password) if Settings.external_services.enable.include?('yandex_mail_admin')
+    Resque.enqueue(RedmineExternalServiceJob, self.uid, clear_password) if Settings.external_services.enable.include?('redmine')
   end
 
   #Only SSHA

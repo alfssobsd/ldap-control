@@ -34,11 +34,12 @@ group :development do
 end
 
 
-#external_services
+#
 gem 'net-ldap', '~> 0.8.0'
 #elastic
-gem 'elasticsearch-rails', '~> 0.1.5'
-gem 'elasticsearch-model', '~> 0.1.5'
+gem 'elasticsearch-rails', '~> 0.1.6'
+gem 'elasticsearch-model', '~> 0.1.6'
+gem 'elasticsearch-persistence', '~> 0.1.6'
 
 #server
 gem 'puma', '~> 2.9.1'

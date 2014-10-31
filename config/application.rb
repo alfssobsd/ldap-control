@@ -17,11 +17,11 @@ module LdapControl
     config.time_zone = 'Moscow'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('external_services', 'locales', '*.{rb,yml}').to_s]
+    # config.i18n.load_path += Dir[Rails.root.join('plugins', 'locales', '*.{rb,yml}').to_s]
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale = :ru
 
-    config.autoload_paths += %W[#{config.root}/lib/external_services/]
+    config.autoload_paths += %W[#{config.root}/lib/plugins/]
     config.autoload_paths += %W[#{config.root}/lib/permissions/]
     config.autoload_paths += %W[#{config.root}/lib/validators/]
   end
