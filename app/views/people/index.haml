@@ -13,6 +13,10 @@
             Filter:
           %dd.active
             = link_to "staff", params.merge({:employeetype => "staff"})
+          %dd.active
+            = link_to "external", params.merge({:employeetype => "external"})
+          %dd.active
+            = link_to "partner", params.merge({:employeetype => "partner"})
 
 .row
   .large-12.columns

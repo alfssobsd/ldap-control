@@ -1,6 +1,9 @@
 class PeopleController < BaseController
   def index
-    @peoples = Ldap::Person.find_by_employeetype("staff")
+    employeetype_list = %w(external staff partner)
+    filters = employeetype_list.map { |name| Net::LDAP::Filter.eq(:employeetype, name) }
+    search_filter = Net::LDAP::Filter.construct("(|#{ filters.join("") })")
+    @peoples = Ldap::Person.find_by_filter(search_filter)
   end
 
   def show
