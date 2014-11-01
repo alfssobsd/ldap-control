@@ -15,7 +15,7 @@ class PeopleController < BaseController
     person = Ldap::Person.find(params[:person_id])
     if person
       photo = Ldap::PersonPhoto.new({dn: person.dn, uid: person.uid})
-      redirect_to photo.get_url(params[:size])
+      redirect_to photo.get_url(params[:size]), :status => 301
     else
       photo = Ldap::PersonPhoto.new
       redirect_to photo.get_dummy_url
