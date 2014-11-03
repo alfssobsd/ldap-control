@@ -1,6 +1,4 @@
-class Api::External::PeoplePhotoController < Api::BaseController
-  before_filter :restrict_access_public
-
+class Api::Public::V1::PeoplePhotoController < Api::Public::BaseController
   def show
     params[:size] ||= 'small'
     person = Ldap::Person.find(params[:id])

@@ -17,10 +17,13 @@ class SessionsController < ApplicationController
     end
   end
 
-
   def destroy
     warden.logout
     redirect_to new_sessions_path
+  end
+
+  def unauthenticated_api
+    render text: "Unauthorized", status: :unauthorized
   end
 
 

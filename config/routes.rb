@@ -7,15 +7,18 @@ Rails.application.routes.draw do
   resources :people, constraints: {id: /[A-Za-z0-9\._-]+/}, only: [:show, :photo] do
     get :photo
   end
-  resource :sessions, only: [:new, :create, :destroy]
+  resource :sessions, only: [:new, :create, :destroy] do
+  end
   resource :profile, only: [:edit, :update_passowrd] do
     patch :update_passowrd
     patch :update_photo
   end
 
   namespace :api do
-    namespace :external do
-      resources :people_photo, only: [:show], constraints: {id: /[A-Za-z0-9\._-]+/}
+    namespace :public do
+      namespace :v1 do
+        resources :people_photo, only: [:show], constraints: {id: /[A-Za-z0-9\._-]+/}
+      end
     end
   end
 
