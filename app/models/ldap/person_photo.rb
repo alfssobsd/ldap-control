@@ -8,16 +8,17 @@ class Ldap::PersonPhoto < Ldap::Entity
   validates :upload_image, upload_image: true
 
   def get(name_size)
-    unless File.exist?(default)
-      filter = Net::LDAP::Filter.eq(DN_ATTR, uid)
-      result = Ldap::Person.search(filter, ['jpegPhoto'])
-      save_and_resize(result)
+    if self.uid and self.dn
+      unless File.exist?(default)
+        filter = Net::LDAP::Filter.eq(DN_ATTR, uid)
+        result = Ldap::Person.search(filter, ['jpegPhoto'])
+        save_and_resize(result)
+      end
+      image(name_size)
+    else
+      return dummy_file_small if name_size == 'small'
+      dummy_file
     end
-    image(name_size)
-  end
-
-  def get_dummy
-    dummy_file
   end
 
   def update(params)
@@ -78,6 +79,10 @@ class Ldap::PersonPhoto < Ldap::Entity
 
   def dummy_file
     "#{Rails.root}/public/media/private/images/default/photo.jpg"
+  end
+
+  def dummy_file_small
+    "#{Rails.root}/public/media/private/images/default/photo_small.jpg"
   end
 
   def image(size)
