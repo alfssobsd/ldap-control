@@ -77,7 +77,7 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def dummy_file
-    "#{Rails.root}/public/media/private#{dummy}"
+    "#{Rails.root}/public/media/private/images/default/photo.jpg"
   end
 
   def image(size)
