@@ -12,13 +12,14 @@ class PeopleController < BaseController
   end
 
   def photo
+    params[:size] ||= 'small'
     person = Ldap::Person.find(params[:person_id])
     if person
       photo = Ldap::PersonPhoto.new({dn: person.dn, uid: person.uid})
-      redirect_to photo.get_url(params[:size]), :status => 301
+      send_file photo.get(params[:size]), type: 'image/jpeg', disposition: 'inline'
     else
       photo = Ldap::PersonPhoto.new
-      redirect_to photo.get_dummy_url
+      send_file photo.get_dummy, type: 'image/jpeg', disposition: 'inline'
     end
   end
 

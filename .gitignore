@@ -7,6 +7,6 @@
 /log/*.log
 /tmp
 /bin
-/public/images/
+/media/private/images/
 .DS_Store banished!
 LdapControl.iml

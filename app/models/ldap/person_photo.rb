@@ -16,17 +16,8 @@ class Ldap::PersonPhoto < Ldap::Entity
     image(name_size)
   end
 
-  def get_url(name_size)
-    unless File.exist?(default)
-      filter = Net::LDAP::Filter.eq(DN_ATTR, uid)
-      result = Ldap::Person.search(filter, ['jpegPhoto'])
-      save_and_resize(result)
-    end
-    url(Settings.photo[name_size])
-  end
-
-  def get_dummy_url
-    dummy
+  def get_dummy
+    dummy_file
   end
 
   def update(params)
@@ -85,17 +76,8 @@ class Ldap::PersonPhoto < Ldap::Entity
     path(Settings.photo['default'])
   end
 
-  def dummy
-    "/images/default/photo.jpg"
-  end
-
   def dummy_file
-    "#{Rails.root}/public#{dummy}"
-  end
-
-  def url(size)
-    return "/images/cache_photo#{dir_path(size)}/#{name_image_file}" if File.exist?(default)
-    dummy
+    "#{Rails.root}/public/media/private#{dummy}"
   end
 
   def image(size)
@@ -112,7 +94,7 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def path(size)
-    dir = "#{Rails.root}/public/images/cache_photo#{dir_path(size)}"
+    dir = "#{Rails.root}/public/media/private/images/cache_photo#{dir_path(size)}"
     FileUtils.mkdir_p dir
     "#{dir}/#{name_image_file}"
   end
