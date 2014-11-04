@@ -1,5 +1,10 @@
 production: &base
 
+  api:
+    public:
+      keys:
+        - 723bca78a2e0277ffbd3f8b627b81a54 # photo
+
   photo:
     default: 500
     big: 400
@@ -54,6 +59,10 @@ production: &base
     base_url: https://redmine.org # [you-redmine-url]
     token: [you-admin-token]
     auth_source_id: [you-ldap-source-id]
+
+  #default Rails.root
+  #media_path: /srv/app/ldap_control/current/media
+  media_path:
 
 development:
   <<: *base
