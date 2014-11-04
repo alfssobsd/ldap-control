@@ -16,14 +16,14 @@ class Ldap::PersonPhoto < Ldap::Entity
       end
       image(name_size)
     else
-      dummy_file(Settings.photo[name_size])
+      dummy_file(name_to_size(name_size))
     end
   end
 
   def update(params)
     self.upload_image = params['upload_image']
     if self.valid?
-      file =  resize(Settings.photo['default'], self.upload_image.path)
+      file =  resize(name_to_size('default'), self.upload_image.path)
       flush
       @@ldap.replace_attribute self.dn, :jpegphoto, File.binread(file)
     end
@@ -68,12 +68,12 @@ class Ldap::PersonPhoto < Ldap::Entity
     end
 
     Settings.photo.each do |size|
-      thumbnails(Settings.photo[size.first]) if size.first != 'default'
+      thumbnails(name_to_size(size.first)) if size.first != 'default'
     end
   end
 
   def default
-    path(Settings.photo['default'])
+    path(name_to_size('default'))
   end
 
   def dummy_file(size='500')
@@ -81,7 +81,7 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def image(name_size)
-    return path(Settings.photo[name_size]) if File.exist?(default)
+    return path(name_to_size(name_size)) if File.exist?(default)
     dummy_file
   end
 
@@ -102,5 +102,10 @@ class Ldap::PersonPhoto < Ldap::Entity
   def media_path
     return "#{Settings.media_path}" if Settings.media_path
     "#{Rails.root}/media"
+  end
+
+  def name_to_size(name_size)
+    return Settings.photo[name_size] if Settings.photo.has_key?(name_size)
+    Settings.photo['default']
   end
 end
