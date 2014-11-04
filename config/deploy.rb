@@ -30,7 +30,7 @@ set :rsync_copy, "rsync --archive --acls --xattrs"
 set :rsync_cache, "shared/deploy"
 set :shared_paths, ['config/db/production.sqlite3' ,'config/database.yml',
                     'log', 'config/puma.rb', 'config/ldap-control-settings.yml',
-                    'public/images/cache_photo', 'tmp']
+                    'media', 'tmp']
 
 # Optional settings:
 set :user, 'rails'    # Username in the server to SSH to.
@@ -56,8 +56,8 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[mkdir -p "#{deploy_to}/shared/public/images/cache_photo"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/public/images/cache_photo"]
+  queue! %[mkdir -p "#{deploy_to}/shared/media"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/media"]
 
   queue! %[mkdir -p "#{deploy_to}/shared/config/db"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config/db"]

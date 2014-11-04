@@ -78,11 +78,11 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def dummy_file
-    "#{Rails.root}/public/media/private/images/default/photo.jpg"
+    "#{Rails.root}/media/photo/default/photo.jpg"
   end
 
   def dummy_file_small
-    "#{Rails.root}/public/media/private/images/default/photo_small.jpg"
+    "#{Rails.root}/media/photo/default/photo_small.jpg"
   end
 
   def image(size)
@@ -99,7 +99,7 @@ class Ldap::PersonPhoto < Ldap::Entity
   end
 
   def path(size)
-    dir = "#{Rails.root}/public/media/private/images/cache_photo#{dir_path(size)}"
+    dir = "#{Rails.root}/media/photo/cache#{dir_path(size)}"
     FileUtils.mkdir_p dir
     "#{dir}/#{name_image_file}"
   end
