@@ -16,8 +16,7 @@ class Ldap::PersonPhoto < Ldap::Entity
       end
       image(name_size)
     else
-      return dummy_file_small if name_size == 'small'
-      dummy_file
+      dummy_file(Settings.photo[name_size])
     end
   end
 
@@ -77,16 +76,12 @@ class Ldap::PersonPhoto < Ldap::Entity
     path(Settings.photo['default'])
   end
 
-  def dummy_file
-    "#{media_path}photo/default/photo.jpg"
+  def dummy_file(size='500')
+    "#{media_path}/photo/default/photo#{size}.jpg"
   end
 
-  def dummy_file_small
-    "#{media_path}photo/default/photo_small.jpg"
-  end
-
-  def image(size)
-    return path(Settings.photo[size]) if File.exist?(default)
+  def image(name_size)
+    return path(Settings.photo[name_size]) if File.exist?(default)
     dummy_file
   end
 
